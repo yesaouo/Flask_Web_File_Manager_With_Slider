@@ -1,0 +1,294 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h2 {
+    margin-block-start: 0.25em;
+}
+
+nav {
+    box-sizing: border-box;
+    width: 240px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+main {
+    width: calc(100% - 240px);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.menu-icon, .sets-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.red-btn {
+    background-color: #f44336;
+}
+.red-btn:hover {
+    background-color: #d32f2f;
+}
+.green-btn {
+    background-color: #4CAF50;
+}
+.green-btn:hover {
+    background-color: #45a049;
+}
+.blue-btn {
+    background-color: #4285f4;
+}
+.blue-btn:hover {
+    background-color: #3367d6;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+#folderContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.folder {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+.folder.dragover {
+    background-color: #e8f0fe;
+    border-color: #4285f4;
+}
+.folder-content {
+    display: none;
+    padding-top: 10px;
+}
+.folder-header {
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.folder-header::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.3s;
+    font-size: 0.8em;
+}
+.folder-header.open::before {
+    transform: rotate(90deg);
+}
+.folder-header span {  
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.upload-btn {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.upload-btn:hover {
+    background-color: #3367d6;
+}
+.file-link {
+    margin: 10px 0;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+}
+.file-link:hover {
+    background-color: #f0f0f0;
+}
+
+#bottomButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+#createFolderBtn, #deleteBtn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#createFolderBtn {
+    background-color: #4285f4;
+    color: white;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+#createFolderBtn:hover {
+    background-color: #3367d6;
+}
+#deleteBtn {
+    background-color: #f44336;
+    color: white;
+    width: 50px;
+}
+#deleteBtn:hover {
+    background-color: #d32f2f;
+}
+#deleteBtn.fullWidth {
+    width: 100%;
+}
+
+
+.progress-container {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#progressText {
+    margin: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+#progressBar {
+    width: 100%;
+}
+.progress-btns button {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#startPauseBtn.paused {
+    background-color: #FFA500;
+}
+#startPauseBtn.paused:hover {
+    background-color: #FF8C00;
+}
+#startPauseBtn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+.progress-btns {
+    text-align: center;
+}
+
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#snackbar.offline {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s;
+    animation: fadein 0.5s;
+}
+#snackbar.success {
+    background-color: #4CAF50; /* 綠色 */
+}
+#snackbar.error {
+    background-color: #f44336; /* 紅色 */
+}
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+
+dialog {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border: none;
+    background-color: rgba(0,0,0,0.4);
+}
+.dialog-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.dialog-content button {
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}

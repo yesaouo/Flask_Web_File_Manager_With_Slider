@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Web File Manager With Slider</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="progress-container">
+                <div id="progressText">文件處理進度: 0/0</div>
+                <progress id="progressBar" value="0" max="0">0/0</progress>
+                <div class="progress-btns">
+                    <button class="green-btn" disabled id="startPauseBtn">完成</button>
+                    <button class="blue-btn" id="refreshBtn">刷新</button>
+                </div>
+            </div>
+            <div id="folderContainer"></div>
+            <div id="bottomButtons">
+                <button id="createFolderBtn">創建新文件夾</button>
+                <button id="deleteBtn" title="刪除">🗑️</button>
+            </div>
+            <input type="file" id="fileInput" style="display: none;" multiple>
+        </nav>
+        <main>
+            <header>
+                <div class="menu-icon">☰</div>
+                Flask Web File Manager With Slider
+                <div class="sets-icon">⚙️</div>
+            </header>
+        </main>
+    </div>
+
+    <!-- 設置對話框 -->
+    <dialog id="settingsDialog">
+        <div class="dialog-content" id="settingsContent">
+            <h2>設置</h2>
+            <button class="red-btn" id="closeBackendBtn">終止後端</button>
+            <button class="green-btn" id="settingsCloseBtn">關閉</button>
+        </div>
+    </dialog>
+
+    <div id="snackbar"></div>
+    <script src="script.js"></script>
+</body>
+</html>
