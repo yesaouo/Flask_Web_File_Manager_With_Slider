@@ -66,6 +66,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (deleteMode) {
             const target = e.target.closest('.folder, .file-link');
             if (target) {
+                if (target.matches('.folder')) {
+                    // 處理選到的是 folder
+                    const folderName = target.querySelector('.folder-header span').textContent;
+                    console.log(folderName);
+                } else if (target.matches('.file-link')) {
+                    // 處理選到的是 file-link
+                    const folderName = target.closest('.folder').querySelector('.folder-header span').textContent;
+                    const fileName = target.innerHTML;
+                    console.log(folderName, fileName);
+                }
                 target.remove();
             }
         }
